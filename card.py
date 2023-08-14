@@ -39,9 +39,23 @@ class Card(Randommer):
         Returns:
             list: list of types
         '''
-        pass
+        endpoint = '/api/Card/Types/'
+        url = self.get_url() + endpoint
+
+        headers = {
+            "X-Api-Key": api_key
+        }
+        response = requests.get(url=url, headers=headers)
+        if response.status_code == 200:
+            data = response.json()
+        else:
+            data = {"error": "Bad request."}
+        
+        return data
     
 
 
 card = Card()
-print(card.get_card(api_key="2d794c6f46094ceb96bd719c1c26c984", type="visa"))
+print(card.get_card_types(api_key="2d794c6f46094ceb96bd719c1c26c984"))
+card = Card()
+print(card.get_card(api_key="2d794c6f46094ceb96bd719c1c26c984"))
