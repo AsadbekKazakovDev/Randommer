@@ -12,4 +12,9 @@ class SocialNumber(Randommer):
         Returns:
             str: number as str
         '''
-        pass
+        headers = {"X-Api-Key": api_key}
+        r = requests.get(f'{self.get_url()}SocialNumber', headers=headers)
+        return r.json()
+soc = SocialNumber()
+key = "940a688e878544858234dee258149563"
+print(soc.get_SocialNumber(key))
