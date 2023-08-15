@@ -15,7 +15,10 @@ class Text(Randommer):
         Returns:
             str: Lorem text
         '''
-        pass
+        headers = {"X-Api-Key": api_key}
+        params = {"loremType":loremType, "type":type, "number":number}
+        r = requests.get(f'{self.get_url()}Text/LoremIpsum', headers=headers, params=params)
+        return r.json()
     
     def generate_password(self, api_key: str, length: int, hasDigits: bool, hasUppercase: bool, hasSpecial: bool) -> str:
         '''Generate lorem ipsum
@@ -30,4 +33,15 @@ class Text(Randommer):
         Returns:
             str: pasword
         '''
-        pass
+        headers = {"X-Api-Key": api_key}
+        params = {
+            "length": length,
+            "hasDigits": hasDigits,
+            "hasUppercase": hasUppercase,
+            "hasSpecial": hasSpecial
+        }
+        r = requests.get(f'{self.get_url()}Text/Password', headers=headers, params=params)
+        return r.json()
+text = Text()
+key = "940a688e878544858234dee258149563"
+print(text.generate_password(key, 8, True, True, True))
